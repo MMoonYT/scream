@@ -1,0 +1,233 @@
+/* =====================================================================
+ * Gamereactor design tokens
+ * Curated 14 Sep 2026 from fig-tokens.css (Figma Variables export) and
+ * measured usage across the 22 handoff artboards.
+ *
+ * WHY THIS IS CURATED AND NOT THE EXPORT.
+ * fig-tokens.css declares 313 distinct variables, and no artboard
+ * references a single one of them — 0 var() calls across all 22 files.
+ * It is an accumulation of several Figma libraries rather than one
+ * system: five different variables named blue-500 (one of them Facebook
+ * blue), 47 duplicate -2/-3/-4 pairs mostly holding DIFFERENT values,
+ * --spacing-8 = 8 next to --spacing-8-2 = 32, British and American
+ * spellings of --colour/--color-neutral-500 with different values, and
+ * --color-brand-teal aliased to a blue. Adopting it wholesale would
+ * import exactly the sprawl this refresh exists to end.
+ *
+ * So: every token below is one the artboards actually use, named for the
+ * role it is used in, with the Figma name cited where one matched.
+ * 77% of artboard colour usage already had a token; the rest are noted.
+ *
+ * OWNER DECISIONS ENCODED HERE (14 Sep):
+ *   - Outfit, not the export's "Instrument Sans"
+ *   - Links on the accent, one blue with one meaning
+ *   - Breakpoints 640 / 900 / 1200, with 768 kept as a legacy alias
+ *   - No dark mode for now
+ *   - [data-mode="mobile"] tokens ignored
+ *
+ * EXCLUDED DELIBERATELY: the dark and mobile blocks, all -2/-3/-4/-5
+ * duplicates, --accent-primary / --action-primary (both red, from
+ * another brand), and --font-weight-semi-bold ("demibold" is a quoted
+ * string, not a usable font-weight).
+ *
+ * Nothing here changes rendering until a rule consumes it.
+ * ===================================================================== */
+
+:root {
+
+  /* --- Ramp -------------------------------------------------------
+   * Only the steps the artboards use. Figma names cited. The three
+   * marked (live) are byte-identical to tokens already in the theme,
+   * so the brand carries over untouched rather than being re-picked. */
+
+  --gr-blue-400:      rgb(25,118,210);    /* --blue-400  */
+  --gr-blue-500:      rgb(25,118,210);   /* --blue-500  = --grc-accent (live) */
+  --gr-blue-600:      rgb(0,136,204);    /* --blue-600  */
+
+  --gr-grey-0:        rgb(255,255,255);  /* --grey-0    */
+  --gr-grey-50:       rgb(250,250,250);
+  --gr-grey-100:      rgb(240,240,240);
+  --gr-grey-200:      rgb(232,232,232);  /* no Figma token — the dominant hairline */
+  --gr-grey-300:      rgb(226,226,226);  /* exported as --accent-secondary, which is a misnomer */
+  --gr-grey-400:      rgb(200,203,205);
+  --gr-grey-450:      rgb(171,176,178);  /* = --grc-text-on-dark (live) */
+  --gr-grey-500:      rgb(136,136,136);  /* --grey-500 — see the contrast note below */
+  --gr-grey-550:      rgb(45,45,45);     /* no Figma token — article body ink */
+  --gr-grey-600:      rgb(111,107,102);
+  --gr-grey-800:      rgb(58,57,54);
+  --gr-grey-900:      rgb(24,23,21);     /* --grey-900  = --grc-ink (live) */
+  --gr-grey-1000:     rgb(0,0,0);        /* --grey-1000 */
+
+  --gr-wash:          rgb(238,244,251);  /* no Figma token — callout / band fill */
+  --gr-wash-line:     rgb(219,231,244);  /* no Figma token — its matching edge */
+
+  /* --- Semantic roles ---------------------------------------------
+   * Derived from how the artboards actually use each value, not from
+   * the export's role names — those could not be trusted, since a
+   * hairline shipped as --accent-secondary. */
+
+  --gr-ink:           var(--gr-grey-900);   /* headings, UI        192 uses */
+  --gr-ink-body:      var(--gr-grey-550);   /* running article text — softer than --gr-ink,
+                                               which is what the artboards set on <p> */
+  --gr-ink-meta:      var(--gr-grey-600);   /* captions, meta, disclosure — SEE NOTE */
+  --gr-ink-on-dark:   var(--gr-grey-450);   /* secondary text on the dark ground */
+  --gr-ink-inverse:   var(--gr-grey-0);
+
+  --gr-surface:       var(--gr-grey-0);
+  --gr-surface-sub:   var(--gr-grey-50);
+  --gr-surface-mute:  var(--gr-grey-100);
+  --gr-surface-dark:  var(--gr-grey-900);
+  --gr-surface-wash:  var(--gr-wash);
+
+  --gr-line:          var(--gr-grey-200);   /* the one hairline   90 uses */
+  --gr-line-soft:     var(--gr-grey-300);
+  --gr-line-dark:     var(--gr-grey-800);   /* same role on dark grounds */
+  --gr-line-wash:     var(--gr-wash-line);
+
+  /* ONE BLUE, ONE MEANING (owner decision). blue-400 and blue-600 stay
+     in the ramp because the artboards use them, but link and accent are
+     the same value — and that choice also fixes a contrast failure:
+     blue-400 is 3.10:1 on white and blue-600 is 3.89:1, both under the
+     4.5:1 floor for text. blue-500 is 4.60:1 and passes. */
+  --gr-accent:        var(--gr-blue-500);
+  --gr-accent-hover:  rgb(20,96,172);       /* darkened accent, 6.1:1 */
+  --gr-link:          var(--gr-accent);
+  --gr-link-hover:    var(--gr-accent-hover);
+
+  /* LINKS ON A DARK GROUND.
+     The site link blue measures 4.60:1 on white, which is where it was
+     chosen. On the near-black bands — rgb(24,23,21) — the same value is
+     4.60:1 too, technically over the floor but marginal, and it is doing
+     that work at 12.5px on several of them. This lighter blue measures
+     8.15:1 on that ground.
+     Not a new colour: it is the value the WATCH band's "All …" link was
+     already given by hand for exactly this reason. Naming it here is what
+     makes it reusable rather than a one-off. */
+  --gr-blue-300:      rgb(96,181,255);
+  --gr-link-on-dark:  var(--gr-blue-300);
+
+  /* --- Type --------------------------------------------------------
+   * Outfit for UI and headings, Arial for running text — the pairing
+   * the artboards use and the live theme already loads. The export's
+   * "Instrument Sans" is not used anywhere and is not adopted. */
+
+  --gr-font-ui:       'Outfit', 'Outfit Fallback', system-ui, Arial, sans-serif;
+  --gr-font-body:     Arial, Helvetica, sans-serif;
+
+  --gr-w-regular:     400;
+  --gr-w-medium:      500;
+  --gr-w-semi:        600;
+  --gr-w-bold:        700;
+  --gr-w-display:     800;
+
+  /* SIXTEEN STEPS, replacing 35 arbitrary values.
+     472 of the artboards' declarations already sit on this scale; 266
+     move by 0.5px or less (removing 10.5 / 11.5 / 12.5 / 13.5 / 14.3 /
+     15.5 / 16.5, which are scaling residue rather than choices); 70
+     move by more than that, none by more than 4px. */
+  --gr-fs-10:  10px;   --gr-fs-11:  11px;   --gr-fs-12:  12px;
+  --gr-fs-13:  13px;   --gr-fs-14:  14px;   --gr-fs-16:  16px;
+  /* 17px is the artboards' body size and earns its own step rather than
+     rounding to 16: it is the most-read text on the site and a 1px cut to
+     running copy is the wrong place to spend tidiness. */
+  --gr-fs-17:  17px;
+  --gr-fs-18:  18px;   --gr-fs-20:  20px;   --gr-fs-22:  22px;
+  --gr-fs-26:  26px;   --gr-fs-30:  30px;   --gr-fs-34:  34px;
+  --gr-fs-44:  44px;   --gr-fs-64:  64px;   --gr-fs-76:  76px;
+  --gr-fs-104: 104px;
+
+  --gr-lh-body:        27px;     /* running text at --gr-fs-17 */
+  --gr-lh-tight:       22px;
+
+  --gr-track-caps:     0.1em;    /* 10-12px uppercase labels */
+  --gr-track-label:    0.12em;   /* the artboards' uppercase eyebrow */
+  --gr-track-display: -0.028em;  /* 44px and up */
+
+  /* --- Radius ------------------------------------------------------
+   * Three values. The artboards are already disciplined here — 2px,
+   * 50% and 100px are the only radii they use, against 110 distinct
+   * values in the live CSS. The export's ~20 radius variables (with
+   * --radius-full 9999 beside --radius-full-2 999) are not adopted. */
+  --gr-radius-0:      0;
+  --gr-radius-1:      2px;      /* images, thumbnails, panels */
+  --gr-radius-round:  100px;    /* avatars and dots only */
+
+  /* --- Space -------------------------------------------------------
+   * A 4px base. The export's spacing variables are unusable as named:
+   * --spacing-1 = 1 sits beside --spacing-1-2 = 2, --spacing-12 = 12
+   * beside --spacing-12-2 = 64. */
+  --gr-space-1:   4px;   --gr-space-2:   8px;   --gr-space-3:  12px;
+  --gr-space-4:  16px;   --gr-space-5:  20px;   --gr-space-6:  24px;
+  --gr-space-8:  32px;   --gr-space-10: 40px;   --gr-space-12: 48px;
+
+  /* --- Layout ------------------------------------------------------ */
+  --gr-wrap:      1132px;   /* content width the artboards pin to (owner-confirmed) */
+  --gr-gutter:    16px;
+  /* THREE RAILS, measured across the artboards rather than assumed: 300px is
+     the editorial sidebar (23 uses, Post and Review both), 320px the wider
+     .gr-fold rail (13), 200px the narrow one beside a hero (11). An earlier
+     draft of this file had --gr-rail at 320px; Post and Review are 300. */
+  --gr-rail:      300px;
+  --gr-rail-wide: 320px;
+  --gr-rail-slim: 200px;
+
+  /* --- Motion ------------------------------------------------------ */
+  --gr-dur:       140ms;
+  --gr-ease:      ease-out;
+
+  /* --- Targets ------------------------------------------------------ */
+  --gr-target:     32px;    /* inline controls */
+  --gr-target-mo:  44px;    /* mobile primary controls */
+}
+
+/* =====================================================================
+ * BREAKPOINTS — 640 / 900 / 1200, owner decision.
+ * Not custom properties: a media query cannot read one. They are here
+ * as the single written record of the set, so nothing re-invents it.
+ *
+ *   @media (max-width: 640px)    phone
+ *   @media (max-width: 900px)    tablet and narrow desktop
+ *   @media (max-width: 1200px)   below full width
+ *   @media (min-width: 768px)    LEGACY ALIAS — 35 live rules use it.
+ *                                Retire per component, not in one pass.
+ *
+ * These replace ~50 distinct breakpoints in the live CSS (max-width
+ * alone collapses 24 values into the 640 step, including a max-536px
+ * rule sitting next to a max-537px one) and the artboards' own eight.
+ *
+ * ABOVE 1200: the exceptions are removed (owner decision, 14 Sep). Five
+ * layout rules fold into the 1200 step —
+ *
+ *   max-1280   .grh-wrap / .grh-nav gap
+ *   max-1332   .main width · --grc-gutter · hero+footer · home-new bands
+ *   max-1400   .hp-slots three-column grid
+ *
+ * THREE ARE HELD BACK, because they are ad slots rather than layout and
+ * this refresh does not change ad behaviour:
+ *
+ *   max-1430   #eventad, #leftTopLogo        hidden below 1430
+ *   max-1919   #topScroller.tScroll320,
+ *              #ad_topScroller.desktopScroller  hidden below 1920
+ *   min-1920   #topScroller.tScroll320       sized 1920x800
+ *
+ * Folding min-1920 into min-1200 would put a 1920x800 ad unit on a
+ * 1200px screen. They stay at their current widths until whoever owns
+ * ad ops says otherwise.
+ * ===================================================================== */
+
+/* =====================================================================
+ * CONTRAST NOTE — the one value changed from the artboards.
+ *
+ * The artboards set meta text in rgb(136,136,136) in 152 places. That
+ * is 3.54:1 on white, under the 4.5:1 floor for body text. It is also
+ * the exact value the previous visual-refresh handoff had already
+ * flagged and corrected, on the grounds that the disclosure line it
+ * appears on is legally load-bearing.
+ *
+ * --gr-ink-meta therefore resolves to rgb(111,107,102) — 5.3:1, same
+ * size, same position, same role. rgb(136,136,136) is kept in the ramp
+ * as --gr-grey-500 for any non-text use.
+ *
+ * To ship the artboards' value instead, point --gr-ink-meta at
+ * --gr-grey-500. One line, and it fails AA.
+ * ===================================================================== */

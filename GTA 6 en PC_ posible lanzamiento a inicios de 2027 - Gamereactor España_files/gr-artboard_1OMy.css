@@ -1,0 +1,156 @@
+/* =====================================================================
+ * Gamereactor facelift — artboard layout system
+ *
+ * Lifted VERBATIM from the <style> block of "Homepage Handoff.dc.html".
+ * These are the grids the design was drawn and QA'd against: .gr-wrap,
+ * .gr-hero-top, .gr-fold, .gr-act, .gr-2/3/4/5, .gr-rail-x, .gr-lane,
+ * .gr-split, .gr-casino and their breakpoints.
+ *
+ * NOT re-derived and not re-tokenised. The brief is a 1:1 implementation
+ * of the artboards, so the layout layer is taken as authored rather than
+ * reinterpreted; swapping literals for tokens can follow later without
+ * changing a pixel, because the token values were curated from these same
+ * artboards.
+ *
+ * The .gr-d block is deliberately NOT included: that is the canvas's
+ * desktop pin, which forces the frame to 1132px with !important
+ * regardless of viewport. On a real site the media queries below do that
+ * job, and the pin would defeat every one of them.
+ *
+ * Scoped under body.gr-next so nothing applies until an edition is on.
+ * ===================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* REMOVED FROM THE VERBATIM EXTRACT: the artboard's `body { ... }` and its
+   global `a { ... }` link system.
+   On a canvas those style one isolated page. Scoped to .gr-next on a real
+   site they reach every anchor in the document — including the masthead
+   nav and the footer, which turned the header links blue. The brief is
+   explicit that header and footer are untouched, so the link system is
+   applied by component instead (see gr-components.css), never globally.
+   Everything below this point is still the artboard's own CSS. */
+
+.gr-next .gr-wrap {
+max-width:1132px; margin:0 auto; padding-left:16px; padding-right:16px; box-sizing:content-box;
+}
+.gr-next .gr-fold {
+display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:32px; align-items:start;
+}
+.gr-next .gr-2 {
+display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px;
+}
+.gr-next .gr-3 {
+display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px 18px;
+}
+.gr-next .gr-4 {
+display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px;
+}
+.gr-next .gr-5 {
+display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px;
+}
+.gr-next .gr-rail-x {
+display:flex; flex-direction:row; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; scrollbar-width:thin;
+}
+.gr-next .gr-rail-x > * {
+flex:0 0 264px; scroll-snap-align:start;
+}
+@media (max-width:860px) {
+.gr-next .gr-gamecols {
+grid-template-columns:minmax(0,1fr) !important;
+}
+}
+.gr-next .gr-rail-x::-webkit-scrollbar {
+height:6px;
+}
+.gr-next .gr-rail-x::-webkit-scrollbar-thumb {
+background:rgb(214,214,214);
+}
+@media (max-width:600px) {
+.gr-next .gr-rail-x > * {
+flex:0 0 78%;
+}
+}
+.gr-next .gr-lane {
+display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:28px; align-items:start;
+}
+.gr-next .gr-split {
+display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:40px; align-items:start;
+}
+@media (max-width:980px) {
+.gr-next .gr-fold,
+.gr-next .gr-lane,
+.gr-next .gr-split {
+grid-template-columns:minmax(0,1fr);
+}
+.gr-next .gr-3,
+.gr-next .gr-4,
+.gr-next .gr-5 {
+grid-template-columns:repeat(2,minmax(0,1fr));
+}
+}
+@media (max-width:600px) {
+.gr-next .gr-2,
+.gr-next .gr-3,
+.gr-next .gr-4,
+.gr-next .gr-5 {
+grid-template-columns:minmax(0,1fr);
+}
+}
+.gr-next .gr-act {
+display:grid; grid-template-columns:minmax(0,1fr) minmax(0,auto); gap:28px; align-items:center;
+}
+.gr-next .gr-actword {
+font-family:'Outfit', 'Outfit Fallback',Arial,sans-serif; font-weight:800; font-size:104px; line-height:0.86; letter-spacing:-0.04em; white-space:nowrap;
+}
+.gr-next .gr-hero-top {
+display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:40px; align-items:stretch;
+}
+@media (max-width:980px) {
+.gr-next .gr-hero-top {
+grid-template-columns:minmax(0,1fr); gap:26px;
+}
+}
+@media (max-width:860px) {
+.gr-next .gr-act {
+grid-template-columns:minmax(0,1fr); gap:12px;
+}
+.gr-next .gr-actword {
+font-size:64px;
+}
+}
+.gr-next .gr-casino {
+display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; align-items:start;
+}
+@media (max-width:860px) {
+.gr-next .gr-casino {
+grid-template-columns:minmax(0,1fr);
+}
+}

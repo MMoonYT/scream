@@ -1,0 +1,51 @@
+@font-face {
+    font-family: BMFont;
+    font-display: swap;
+    src: url('../fonts/BMFont.eot');
+    src:
+        url('../fonts/BMFont.eot') format('embedded-opentype'),
+        url('../fonts/BMFont.woff2') format('woff2'),
+        url('../fonts/BMFont.woff') format('woff'),
+        url('../fonts/BMFont.ttf') format('truetype'),
+        url('../fonts/BMFont.svg#BMFont') format('svg');
+}
+
+:root {
+    --bm-font-family: 'BMFont', sans-serif;
+    --bm-font-weight: 700;
+    --bm-alt-font-family: 'Arial', sans-serif;
+    --bm-cta-button-color: #fff;
+    --bm-cta-button-hover-color: #fff;
+    --bm-cta-button-background: #3cb371;
+    --bm-cta-button-hover-background: #3ca36a;
+}
+
+.toplist__disclaimer-above,
+.toplist__disclaimer-below {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    color: #000;
+}
+
+.toplist__disclaimer-above {
+    margin-bottom: 16px;
+}
+
+.toplist__disclaimer-below {
+    margin-top: 16px;
+}
+
+.toplist__show-only-on-mobile {
+    display: none !important;
+}
+
+@media (max-width: 991px) {
+    .toplist__show-only-on-desktop {
+        display: none !important;
+    }
+
+    .toplist__show-only-on-mobile {
+        display: block !important;
+    }
+}

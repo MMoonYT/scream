@@ -1,0 +1,210 @@
+/*
+Theme Name: Gamereactor
+Theme URI: https://www.gamereactor.kr/
+Author: Clickout Media
+Description: Gamereactor editorial, games, video and commercial templates for WordPress multisite.
+Version: 1.0.0
+Requires at least: 6.4
+Requires PHP: 8.1
+Text Domain: gamereactor
+*/
+
+/* Selve designet ligger i assets/css/frontend.css (originalens stylesheet).
+   Denne fil bruges kun til tema-headeren + evt. WP-specifikke justeringer. */
+
+/* "Copied!"-boblen ved Instagram/TikTok-ikonerne. Originalen viser den via
+   sin egen JS; her styres den af klassen .is-visible fra app.js. */
+.socialIcons .linkCopied {
+	position: absolute;
+	transform: translateY(-1.6rem);
+	padding: 2px 6px;
+	border-radius: 3px;
+	background: #222;
+	color: #fff;
+	font-size: 11px;
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .15s ease-in-out;
+}
+.socialIcons .linkCopied.is-visible { opacity: 1; }
+
+/* Brødtekstens billeder kommer fra kilden med originalmål i width/height.
+   Uanset hvad der står i attributterne må de aldrig sprænge artikelspalten. */
+.breadtext img,
+.breadtext video,
+.breadtext iframe {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Billedtekster under figurerne, som originalen viser dem. */
+figure.gr-image {
+	margin: 0 0 1em;
+}
+figure.gr-image figcaption {
+	font-size: 12px;
+	color: #767676;
+	padding-top: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+ * Bokse i højrespalten (casino-modulerne og fremhævede artikler).
+ *
+ * Temaets .artistyle3 article.guide er 232px bred — kortbredden fra den brede
+ * spalte. I den 335px smalle sidebjælke gav det 91px død luft i højre side og
+ * fik indholdet til at se venstrestillet ud. Overskriftsbjælken var samtidig
+ * 302 af 335px.
+ *
+ * Her fylder boksen spalten, bjælken går kant til kant, og indholdet har
+ * symmetrisk polstring.
+ * ------------------------------------------------------------------------ */
+.colthin .gr-sidebox {
+	width: 100%;
+	max-width: 100%;
+	margin: 0 0 1em;
+	padding: 0 0 12px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.colthin .gr-sidebox > h4.hbar1 {
+	margin: 0 0 10px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.colthin .gr-sidebox .content,
+.colthin .gr-sidebox article.guide {
+	width: auto;
+	max-width: none;
+	margin: 0;
+	padding: 0 12px;
+	box-sizing: border-box;
+	float: none;
+}
+
+.colthin .gr-sidebox article.guide + article.guide {
+	margin-top: 14px;
+}
+
+.colthin .gr-sidebox img {
+	width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 0 6px;
+}
+
+
+/* Shared navigation controls and modal behavior for both designs. */
+/* Keep text large enough to avoid automatic focus zoom on mobile. */
+#topsearch #search-field { font-size: 16px; }
+button.nav-contentIcon {
+	appearance: none;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	line-height: 1;
+	box-shadow: none;
+}
+button.nav-contentIcon svg { color: inherit; fill: currentColor; }
+button.nav-contentIcon:hover { color: #171715; }
+button.nav-contentIcon:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+html.gr-menu-open { overflow: hidden; scroll-behavior: auto; }
+body.gr-menu-open {
+	position: fixed;
+	inset-inline: 0;
+	top: var(--gr-menu-scroll-y);
+	overflow: hidden;
+}
+
+dialog#nav-content[open] {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	inline-size: min(1180px, 94vw);
+	max-inline-size: 94vw;
+	max-block-size: 88dvh;
+	inset-inline: 0;
+	margin-inline: auto;
+	padding: 0;
+	overflow: hidden;
+}
+#nav-content .gr-nav-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-shrink: 0;
+	padding: 12px 30px;
+	background: #fff;
+	border-bottom: 1px solid #ececec;
+}
+#nav-content .gr-nav-body {
+	min-height: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	padding: 0 30px 30px;
+}
+#nav-content button.gr-nav-close {
+	appearance: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 44px;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-radius: 2px;
+	background: transparent;
+	color: #333;
+	box-shadow: none;
+	cursor: pointer;
+}
+#nav-content button.gr-nav-close svg {
+	position: static;
+	float: none;
+	width: 22px;
+	height: 22px;
+	margin: 0;
+	color: inherit;
+	fill: currentColor;
+}
+#nav-content button.gr-nav-close:hover { background: #f1f1f1; color: #111; }
+#nav-content button.gr-nav-close:focus-visible {
+	outline: 2px solid #1674d1;
+	outline-offset: 2px;
+}
+@media (max-width: 700px) {
+	#nav-content .gr-nav-header { padding: 8px 16px; }
+	#nav-content .gr-nav-body { padding: 0 16px 22px; }
+}
+
+/* Public page landmarks and keyboard bypass, without changing the outer layout. */
+#main-content { display: flow-root; min-width: 0; }
+#main-content:focus { outline: none; }
+.gr-sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.gr-skip-link {
+    position: fixed; inset-block-start: 8px; inset-inline-start: 8px;
+    transform: translateY(-200%); z-index: 100000;
+    padding: 12px 18px; background: #fff; color: #171715;
+    font: 700 16px/1.4 Arial, sans-serif;
+}
+.gr-skip-link:focus {
+    transform: none; color: #171715; background: #fff;
+    outline: 3px solid #1674d1; outline-offset: 2px;
+}
+.gr-langmenu[hidden], .schema-faq-answer[hidden] { display: none !important; }
+.gr-langmenu a:focus-visible { outline: 2px solid #1674d1; outline-offset: -2px; }
+.gr-rss-filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.gr-rss-filters label { font-weight: 700; }

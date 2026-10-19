@@ -1,0 +1,14 @@
+.gr-editorial-box { margin: 1.75rem 0; padding: 1.25rem; background: #f3f3f3; color: #222; border-inline-start: 4px solid #e84525; }
+.gr-editorial-box h2 { margin: 0 0 .75rem; font-size: 1.3rem; line-height: 1.3; }
+.gr-editorial-box p:last-child { margin-bottom: 0; }
+.gr-editorial-scores { margin: 0; }
+.gr-editorial-scores > div { display: flex; justify-content: space-between; gap: 1rem; padding: .4rem 0; }
+.gr-editorial-scores dd { margin: 0; white-space: nowrap; font-weight: 700; }
+
+.gr-editorial-related { margin: 1.5rem 0; padding: 1rem 0; border-block: 1px solid #ddd; }
+.gr-editorial-related h2 { margin: 0 0 .75rem; font-family: inherit; font-size: 1.15rem; line-height: 1.4; font-weight: 700; }
+.gr-editorial-related ul { margin: 0; padding-inline-start: 1.25rem; list-style: disc; }
+.gr-editorial-related li { margin: .5rem 0; font-size: 1rem; line-height: 1.5; overflow-wrap: anywhere; }
+.gr-editorial-related a { color: #006b9c; text-decoration: underline; text-underline-offset: .15em; }
+.gr-editorial-related a:hover { color: #004b70; }
+.gr-editorial-related a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
